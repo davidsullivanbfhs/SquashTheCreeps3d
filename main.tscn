@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cnu1e2wgx00h1"]
+[gd_scene load_steps=7 format=3 uid="uid://cnu1e2wgx00h1"]
 
 [ext_resource type="PackedScene" uid="uid://bwnbehak57kyi" path="res://player.tscn" id="1_yfjs7"]
 
@@ -7,6 +7,14 @@ size = Vector3(68, 2, 68)
 
 [sub_resource type="BoxMesh" id="BoxMesh_nypyj"]
 size = Vector3(68, 2, 68)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7qtdh"]
+albedo_color = Color(1, 0, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_tlsfn"]
+material = SubResource("StandardMaterial3D_7qtdh")
+
+[sub_resource type="Curve3D" id="Curve3D_obwd1"]
 
 [node name="Main" type="Node"]
 
@@ -25,10 +33,31 @@ shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_yfjs7")]
 
-[node name="CameraPivot" type="Marker3D" parent="."]
+[node name="CameraRotation" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
 
-[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+[node name="CameraPosition" type="Camera3D" parent="CameraRotation"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 19)
 projection = 1
 size = 19.0
+
+[node name="Cylanders" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cylanders"]
+transform = Transform3D(1, 0, 0, 0, 0.998731, -0.0503663, 0, 0.0503663, 0.998731, -12.2825, 0, 13.5011)
+mesh = SubResource("CylinderMesh_tlsfn")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Cylanders"]
+transform = Transform3D(1, 0, 0, 0, 0.998731, -0.0503663, 0, 0.0503663, 0.998731, 12.5249, 0, 13.5011)
+mesh = SubResource("CylinderMesh_tlsfn")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Cylanders"]
+transform = Transform3D(1, 0, 0, 0, 0.998731, -0.0503663, 0, 0.0503663, 0.998731, -12.2825, 0, -12.468)
+mesh = SubResource("CylinderMesh_tlsfn")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Cylanders"]
+transform = Transform3D(1, 0, 0, 0, 0.998731, -0.0503663, 0, 0.0503663, 0.998731, 12.5249, 0, -12.468)
+mesh = SubResource("CylinderMesh_tlsfn")
+
+[node name="Path3D" type="Path3D" parent="Cylanders"]
+curve = SubResource("Curve3D_obwd1")
